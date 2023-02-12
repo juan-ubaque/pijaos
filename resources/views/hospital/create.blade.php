@@ -3,7 +3,8 @@
 
 @section('contenido')
 <h2>REGISTRO HOSPITAL</h2>
-<form action="/pijaosEps/public/hospital" method="post" class="text-bg-dark ">
+<form action="/hospital" method="post" class="text-bg-dark ">
+    @method('POST')
     @csrf
     <div class="mb-3">
         <label for="COD_HOSPITAL" class="form-label">COD_HOSPITAL</label>
@@ -13,7 +14,7 @@
         <label for="NOMBRE" class="form-label">NOMBRE</label>
         <input type="text" class="form-control text-bg-secondary" id="NOMBRE" name="NOMBRE">
     </div>
-    <a href="/pijaosEps/public/hospital" class="btn btn-secondary">CANCELAR</a>
+    <a href="/hospital" class="btn btn-secondary">CANCELAR</a>
     <button type="submit" class="btn btn-primary">GUARDAR</button>
 </form>
 @endsection

@@ -55,42 +55,57 @@ class HospitalController extends Controller
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\Response
      */
-    public function show(Hospital $hospital)
+    public function show(Hospital $hospitales)
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @param int $id
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hospital $hospital)
+    public function edit($id)
     {
-        //
+        // Obtenemos el registro a editar desde la base de datos
+        $hospital = Hospital::find($id);
+        // Retornamos la vista con los datos del registro a editar
+
+        return view('hospital.edit')->with('hospital',$hospital);
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     *  @param int $id
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hospital $hospital)
+    public function update(Request $request,$id)
     {
-        //
+        //Una vez obtenido el registro a editar, se procede a actualizarlo
+        $hospital = Hospital::find($id);
+        $hospital->COD_HOSPITAL = $request->COD_HOSPITAL;
+        $hospital->nombre = $request->NOMBRE;
+
+        $hospital->save();
+        return redirect('hospital/');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     *  @param int $id
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hospital $hospital)
+    public function destroy($id)
     {
-        //
+        //Obtenemos el registro a eliminar
+        $hospital = Hospital::find($id);
+        //Eliminamos el registro
+        $hospital->delete();
+        //Redireccionamos a la vista index
+        return redirect('hospital/');
     }
 }
