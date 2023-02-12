@@ -17,7 +17,7 @@ return new class extends Migration
             //Creamos un choise para los tipos de documentos mas comunes
             $table->unsignedBigInteger('NO_DOCUMENTO')->primary();
             $table->enum('TIPO_DOC', ['CC', 'TI', 'CE','OTRO']);
-            $table->string('NOMBREs');
+            $table->string('NOMBRES');
             $table->string('APELLIDOS');
             //fecha de nacimiento
             $table->date('FEC_NACIMIENTO');

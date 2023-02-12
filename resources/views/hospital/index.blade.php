@@ -8,7 +8,7 @@
     <table class="table table-striped table-dark mt-4">
         <thead>
             <tr>
-                <th scope="col">COD_HOSPITAL/th>
+                <th scope="col">COD_HOSPITAL</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Acciones</th>
             </tr>

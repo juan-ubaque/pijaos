@@ -11,11 +11,13 @@ class GestionHospitalaria extends Model
 
 
     //agregamos el metodo para la relacion de uno a muchos con la tabla hospital
-    //public function hospital()
-    //{
-    //    return $this->belongsTo('App\Models\Hospital');
-    //}
+    protected $table = 'gestion_hospitalaria';
+    //Indicamos el uso del campo created_ad
+    // se debe especificar el nombre de la clave primaria del siguiente modo:
+        protected $primaryKey = 'ID_HOSPITALIZACION';
 
+    //indicamos los campos que se pueden llenar
+    protected $dates = ['created_at', 'deleted_at'];
     public function hospital()
 {
     return $this->belongsTo(Hospital::class, 'COD_HOSPITAL', 'COD_HOSPITAL');

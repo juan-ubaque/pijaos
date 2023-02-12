@@ -18,7 +18,7 @@
     <h1 class="bg-primary text-white text-center">CRUD PIJAOS EPS</h1>
     </header>
     <main>
-        <div class="container">
+        <div class="container text-center">
             @yield('contenido')
         </div>
     </main>

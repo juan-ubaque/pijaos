@@ -8,7 +8,7 @@
         @method('PUT')
         <div class="mb-3">
             <label for="COD_HOSPITAL" class="form-label">COD_HOSPITAL</label>
-            <input value={{$hospital->COD_HOSPITAL}} type="text" class="form-control text-bg-secondary" id="COD_HOSPITAL"name="COD_HOSPITAL" >
+            <input value="{{$hospital->COD_HOSPITAL}}" type="text" class="form-control text-bg-secondary" id="COD_HOSPITAL"name="COD_HOSPITAL" >
         </div>
         <div class="mb-3">
             <label for="NOMBRE" class="form-label">NOMBRE</label>

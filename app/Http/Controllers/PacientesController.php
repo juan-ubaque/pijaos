@@ -14,7 +14,12 @@ class PacientesController extends Controller
      */
     public function index()
     {
-        //
+        //consultar los pacientes de la base de datos
+        $pacientes = Pacientes::all();
+        //retornar la vista con los pacientes
+
+        return view('pacientes.index')->with('pacientes',$pacientes);
+
     }
 
     /**
@@ -25,6 +30,7 @@ class PacientesController extends Controller
     public function create()
     {
         //
+        return view('pacientes.create');
     }
 
     /**
@@ -35,7 +41,30 @@ class PacientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //validar los datos
+        $request->validate([
+            'TIPO_DOC' => 'required|in:CC,TI,CE,OTRO',
+            'NO_DOCUMENTO' => 'required|numeric',
+            'NOMBRES' => 'required|string',
+            'APELLIDOS' => 'required|string',
+            'FEC_NACIMIENTO' => 'required|date',
+            'EMAIL' => 'required|email',
+        ]);
+
+        //Aca se guarda el paciente
+        $paciente = new Pacientes();
+        $paciente->TIPO_DOC = $request->TIPO_DOC;
+        $paciente->NO_DOCUMENTO = $request->NO_DOCUMENTO;
+        $paciente->NOMBRES = $request->NOMBRES;
+        $paciente->APELLIDOS = $request->APELLIDOS;
+        $paciente->FEC_NACIMIENTO = $request->FEC_NACIMIENTO;
+        $paciente->EMAIL = $request->EMAIL;
+
+        //guardar el paciente
+        $paciente->save();
+        //redireccionar a la vista de pacientes
+        return redirect('paciente/');
     }
 
     /**
@@ -51,35 +80,66 @@ class PacientesController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @param int $id
      * @param  \App\Models\Pacientes  $pacientes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pacientes $pacientes)
+    public function edit($id)
     {
-        //
+        //Consultar el paciente
+        $pacientes = Pacientes::find($id);
+        //retornar la vista con los datos del paciente
+        return view('pacientes.edit')->with('pacientes',$pacientes);
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     * @param int $id
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pacientes  $pacientes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pacientes $pacientes)
+    public function update(Request $request, $id)
     {
-        //
+        //obtener el paciente a editar
+        $pacientes = Pacientes::find($id);
+        //validar los datos
+        $request->validate([
+            'TIPO_DOC' => 'required|in:CC,TI,CE,OTRO',
+            'NO_DOCUMENTO' => 'required|numeric',
+            'NOMBRES' => 'required|string',
+            'APELLIDOS' => 'required|string',
+            'FEC_NACIMIENTO' => 'required|date',
+            'EMAIL' => 'required|email',
+        ]);
+
+        //Aca se guarda el paciente
+        $pacientes->TIPO_DOC = $request->TIPO_DOC;
+        $pacientes->NO_DOCUMENTO = $request->NO_DOCUMENTO;
+        $pacientes->NOMBRES = $request->NOMBRES;
+        $pacientes->APELLIDOS = $request->APELLIDOS;
+        $pacientes->FEC_NACIMIENTO = $request->FEC_NACIMIENTO;
+        $pacientes->EMAIL = $request->EMAIL;
+
+        //guardar el paciente
+        $pacientes->save();
+        //redireccionar a la vista de pacientes
+        return redirect('paciente/');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @param int $id
      * @param  \App\Models\Pacientes  $pacientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pacientes $pacientes)
+    public function destroy($id)
     {
-        //
+        //Obtenemos el registro a eliminar
+        $pacientes = Pacientes::find($id);
+        //Eliminamos el registro
+        $pacientes->delete();
+        //Redireccionamos a la vista de pacientes
+        return redirect('paciente/');
     }
 }
