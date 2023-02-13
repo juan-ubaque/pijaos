@@ -2,8 +2,18 @@
 
 
 @section('contenido')
+
 <h2>Registro Paciente</h2>
 <form action="/paciente" method="post" class="text-bg-dark ">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     @method('POST')
     @csrf
     <div class="mb-3">

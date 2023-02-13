@@ -16,6 +16,15 @@
         </div>
         <a href="/hospital" class="btn btn-secondary">CANCELAR</a>
         <button type="submit" class="btn btn-primary">GUARDAR</button>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     </form>
 
 @endsection

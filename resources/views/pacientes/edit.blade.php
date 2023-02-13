@@ -3,6 +3,15 @@
 @section('contenido')
 <h2>Edicion de Paciente: </h2>
 <form action="/paciente/{{$pacientes->NO_DOCUMENTO}}" method="post" class="text-bg-dark ">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     @method('PUT')
     @csrf
     <div class="mb-3">

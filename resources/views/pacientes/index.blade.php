@@ -32,6 +32,11 @@
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('¿Estas seguro de borrar el registro?')" type="submit" class="btn btn-danger">Eliminar</button>
+                            @if(Session::has('Error'))
+                                <div class="alert alert-danger m-1">
+                                    {{ Session::get('Error') }}
+                                </div>
+                            @endif
                         </form>
                     </td>
                 </tr>

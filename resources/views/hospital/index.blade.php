@@ -2,6 +2,7 @@
 
 
 @section('contenido')
+
     <h1>vista index</h1>
     <a href="/hospital/create" class="btn btn-primary">Crear</a>
 
@@ -24,9 +25,15 @@
                             @csrf
                             @method('DELETE')
                             <button onclick="return confirm('¿Estas seguro de borrar el registro?')" type="submit" class="btn btn-danger">Eliminar</button>
+                            @if(Session::has('Error'))
+                                <div class="alert alert-danger m-1">
+                                    {{ Session::get('Error') }}
+                                </div>
+                            @endif
+
                         </form>
                     </td>
                 </tr>
-            @endforeach
+        @endforeach
         </tbody>
 @endsection

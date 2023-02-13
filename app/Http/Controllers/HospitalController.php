@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\GestionHospitalaria;
 
 use App\Models\Hospital;
 use Illuminate\Http\Request;
@@ -42,6 +43,20 @@ class HospitalController extends Controller
     {
         //
         $hospital = new Hospital();
+
+        //validamos que el nombre del hospital no se repita y en caso de que se repita, se envia un mensaje de error en la vista en alerta de bootstrap
+        $request->validate([
+            'COD_HOSPITAL' => 'required|unique:hospitales,COD_HOSPITAL',
+            'NOMBRE' => 'required|unique:hospitales,NOMBRE'
+        ],[
+            'COD_HOSPITAL.required' => 'El campo COD_HOSPITAL es obligatorio',
+            'COD_HOSPITAL.unique' => 'El campo COD_HOSPITAL ya existe',
+            'NOMBRE.required' => 'El campo NOMBRE es obligatorio',
+            'NOMBRE.unique' => 'El campo NOMBRE ya existe']);
+
+
+
+
         $hospital->COD_HOSPITAL = $request->COD_HOSPITAL;
         $hospital->nombre = $request->NOMBRE;
 
@@ -86,6 +101,14 @@ class HospitalController extends Controller
     {
         //Una vez obtenido el registro a editar, se procede a actualizarlo
         $hospital = Hospital::find($id);
+        $request->validate([
+            'COD_HOSPITAL' => 'required|unique:hospitales,COD_HOSPITAL',
+            'NOMBRE' => 'required|unique:hospitales,NOMBRE'
+        ],[
+            'COD_HOSPITAL.required' => 'El campo COD_HOSPITAL es obligatorio',
+            'COD_HOSPITAL.unique' => 'El campo COD_HOSPITAL ya existe',
+            'NOMBRE.required' => 'El campo NOMBRE es obligatorio',
+            'NOMBRE.unique' => 'El campo NOMBRE ya existe']);
         $hospital->COD_HOSPITAL = $request->COD_HOSPITAL;
         $hospital->nombre = $request->NOMBRE;
 
@@ -103,6 +126,11 @@ class HospitalController extends Controller
     {
         //Obtenemos el registro a eliminar
         $hospital = Hospital::find($id);
+        //validamos que  no alla registro en gestion_hospitalaria que tenga el id del hospital a eliminar
+        $count =  GestionHospitalaria::where('COD_HOSPITAL',$id)->count();
+        if ($count > 0) {
+            return redirect('hospital/')->with('Error', 'No se puede eliminar este hospital ya que existen registros en la tabla gestion_hospitalaria relacionados a él.');
+        }
         //Eliminamos el registro
         $hospital->delete();
         //Redireccionamos a la vista index

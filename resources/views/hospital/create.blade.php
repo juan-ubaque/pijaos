@@ -1,9 +1,18 @@
 @extends('layouts.base')
 
-
 @section('contenido')
+
 <h2>REGISTRO HOSPITAL</h2>
 <form action="/hospital" method="post" class="text-bg-dark ">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     @method('POST')
     @csrf
     <div class="mb-3">

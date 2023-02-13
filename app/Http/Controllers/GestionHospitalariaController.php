@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Hospital;
+use App\Models\Pacientes;
 use App\Models\GestionHospitalaria;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,11 @@ class GestionHospitalariaController extends Controller
      */
     public function create()
     {
-        //retornamos la vista gestion_hospitalaria.create
-        return view('gestion_hospitalaria.create');
+        //obtenemos la informacion de la tabla hospital y pacientes
+        $hospitales = Hospital::all();
+        $pacientes = Pacientes::all();
+        //retornamos la vista gestion_hospitalaria.create y le pasamos la informacion de la tabla hospital
+        return view('gestion_hospitalaria.create')->with('hospitales',$hospitales)->with('pacientes',$pacientes);
     }
 
     /**

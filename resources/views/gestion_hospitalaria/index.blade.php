@@ -7,13 +7,13 @@
     <table class="table table-striped table-dark mt-4">
         <thead>
             <tr>
-                <th scope="col">ID_HOSPITALIZACION</th>
-                <th scope="col">TIPO_DOC_PACIENTE</th>
-                <th scope="col">NO_DOC_PACIENTE</th>
-                <th scope="col">COD_HOSPITAL</th>
-                <th scope="col">FEC_INGRESO</th>
-                <th scope="col">FEC_SALIDA</th>
-                <th scope="col">FEC_CREACION</th>
+                <th scope="col">HOSÍTALIZACION NRO</th>
+                <th scope="col">TIPO DOCUMENTO DEL PACIENTE</th>
+                <th scope="col">NRO DOCUMENTO DEL PACIENTE</th>
+                <th scope="col">CODIGO HOSPITAL</th>
+                <th scope="col">FECHA DE INGRESO</th>
+                <th scope="col">FECHA DE SALIDA</th>
+                <th scope="col">FECHA DE CREACION</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
@@ -29,11 +29,11 @@
                     <td scope="row">{{ $gestion->created_at}}</td>
 
                     <td>
-                        <a href="gestion_hospitalaria/{{$gestion->ID_HOSPITALIZACION}}/edit" class="btn btn-info">Editar</a>
+                        <a href="gestion_hospitalaria/{{$gestion->ID_HOSPITALIZACION}}/edit" class="btn btn-info m-1 h-3">Editar</a>
                         <form action="{{ route ('gestion_hospitalaria.destroy',$gestion->ID_HOSPITALIZACION)}}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button onclick="return confirm('¿Estas seguro de borrar el registro?')" type="submit" class="btn btn-danger">Eliminar</button>
+                            <button onclick="return confirm('¿Estas seguro de borrar el registro?')" type="submit" class="btn btn-danger m-1">Eliminar</button>
                         </form>
                     </td>
                 </tr>

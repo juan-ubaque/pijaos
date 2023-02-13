@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\GestionHospitalaria;
 use App\Models\Pacientes;
 use Illuminate\Http\Request;
 
@@ -45,11 +45,21 @@ class PacientesController extends Controller
         //validar los datos
         $request->validate([
             'TIPO_DOC' => 'required|in:CC,TI,CE,OTRO',
-            'NO_DOCUMENTO' => 'required|numeric',
-            'NOMBRES' => 'required|string',
+            'NO_DOCUMENTO' => 'required|numeric|unique:pacientes,NO_DOCUMENTO',
+            'NOMBRES' => 'required|string|unique:pacientes,NOMBRES',
             'APELLIDOS' => 'required|string',
             'FEC_NACIMIENTO' => 'required|date',
             'EMAIL' => 'required|email',
+        ],[
+            'TIPO_DOC.required' => 'El campo TIPO_DOC es obligatorio',
+            'TIPO_DOC.in' => 'El campo TIPO_DOC debe ser CC, TI, CE, OTRO',
+            'NO_DOCUMENTO.required' => 'El campo NO_DOCUMENTO es obligatorio',
+            'NO_DOCUMENTO.numeric' => 'El campo NO_DOCUMENTO debe ser numerico',
+            'NO_DOCUMENTO.unique' => 'El campo NO_DOCUMENTO ya existe',
+            'NOMBRES.required' => 'El campo NOMBRES es obligatorio',
+            'NOMBRES.string' => 'El campo NOMBRES debe ser texto',
+            'APELLIDOS.required' => 'El campo APELLIDOS es obligatorio',
+            'APELLIDOS.string' => 'El campo APELLIDOS debe ser texto'
         ]);
 
         //Aca se guarda el paciente
@@ -110,8 +120,18 @@ class PacientesController extends Controller
             'NOMBRES' => 'required|string',
             'APELLIDOS' => 'required|string',
             'FEC_NACIMIENTO' => 'required|date',
-            'EMAIL' => 'required|email',
-        ]);
+            'EMAIL' => 'required|email',],
+            [
+            'TIPO_DOC.required' => 'El campo TIPO_DOC es obligatorio',
+            'TIPO_DOC.in' => 'El campo TIPO_DOC debe ser CC, TI, CE, OTRO',
+            'NO_DOCUMENTO.required' => 'El campo NO_DOCUMENTO es obligatorio',
+            'NO_DOCUMENTO.numeric' => 'El campo NO_DOCUMENTO debe ser numerico',
+            'NO_DOCUMENTO.unique' => 'El campo NO_DOCUMENTO ya existe',
+            'NOMBRES.required' => 'El campo NOMBRES es obligatorio',
+            'NOMBRES.string' => 'El campo NOMBRES debe ser texto',
+            'APELLIDOS.required' => 'El campo APELLIDOS es obligatorio',
+            'APELLIDOS.string' => 'El campo APELLIDOS debe ser texto'
+            ]);
 
         //Aca se guarda el paciente
         $pacientes->TIPO_DOC = $request->TIPO_DOC;
@@ -137,6 +157,10 @@ class PacientesController extends Controller
     {
         //Obtenemos el registro a eliminar
         $pacientes = Pacientes::find($id);
+        $count =  GestionHospitalaria::where('NO_DOC_PACIENTE',$id)->count();
+        if ($count > 0) {
+            return redirect('paciente/')->with('Error', 'No se puede eliminar este hospital ya que existen registros en la tabla gestion_hospitalaria relacionados a él.');
+        }
         //Eliminamos el registro
         $pacientes->delete();
         //Redireccionamos a la vista de pacientes
