@@ -1,10 +1,10 @@
 @extends('layouts.base')
 
 @section('contenido')
-    <h1>Listado de Las Gestiones Hospitalarias</h1>
-    <a href="{{ route('gestion_hospitalaria.create') }}" class="btn btn-primary">Crear Paciente</a>
+<a href="{{ route('gestion_hospitalaria.create') }}" class="btn btn-primary m-3">Crear Paciente</a>
+<h1>Listado de Las Gestiones Hospitalarias</h1>
 
-    <table class="table table-striped table-dark mt-4">
+    <table class="table table-striped table-dark mt-4 border border-dark-subtle">
         <thead>
             <tr>
                 <th scope="col">HOSÍTALIZACION NRO</th>

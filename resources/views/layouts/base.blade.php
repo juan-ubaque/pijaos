@@ -11,14 +11,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+
+    <<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
     <header>
-    <h1 class="bg-primary text-white text-center">CRUD PIJAOS EPS</h1>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary d-flex justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/hospital">Hospitales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/paciente">Pacientes</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/gestion_hospitalaria">Gestion Hospitalaria</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <div class="container text-center">
+        <div class="container text-center ">
             @yield('contenido')
         </div>
     </main>

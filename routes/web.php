@@ -16,7 +16,7 @@ use App\Http\Controllers\GestionHospitalariaController; //permite acceder al con
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('hospital/');
 });
 
 

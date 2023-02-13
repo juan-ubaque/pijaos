@@ -1,10 +1,10 @@
 @extends('layouts.base')
 
 @section('contenido')
+<a href="{{ route('paciente.create') }}" class="btn btn-primary m-3">Crear Paciente</a>
     <h1>Listado de Pacientes:</h1>
-    <a href="{{ route('paciente.create') }}" class="btn btn-primary">Crear Paciente</a>
 
-    <table class="table table-striped table-dark mt-4">
+    <table class="table table-striped table-dark mt-4 border border-dark-subtle">
         <thead>
             <tr>
                 <th scope="col">TIPO_DOCUMENTO</th>

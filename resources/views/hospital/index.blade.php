@@ -2,11 +2,12 @@
 
 
 @section('contenido')
+    <div class="container text-center col">
+        <a href="/hospital/create" class="btn btn-primary m-3 ">Crear</a>
+        <h1>Listado de Hospitales</h1>
+    </div>
 
-    <h1>vista index</h1>
-    <a href="/hospital/create" class="btn btn-primary">Crear</a>
-
-    <table class="table table-striped table-dark mt-4">
+    <table class="table table-striped table-dark mt-4 border border-dark-subtle">
         <thead>
             <tr>
                 <th scope="col">COD_HOSPITAL</th>
